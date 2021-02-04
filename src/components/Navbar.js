@@ -1,5 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+// import { v4 as uuidv4 } from 'uuid'
+
+
+
+// const linkTarget = {
+//   pathname: '/panel',
+//   key: uuidv4(), 
+//   state: {
+//     applied: true
+//   }
+// }
 
 export default function Navbar() {
 
@@ -12,15 +23,16 @@ export default function Navbar() {
     </div>
     <div className="navbar-menu is-active">
       <div className="navbar-end">
-        <div className="navbar-item">
+        <div className="navbar-item is-active">
           <Link to={'/'}>Home</Link>
         </div>
         <div className="navbar-item">
-          <Link to={'/panel'}>New Search</Link>
+          <Link to={'/panel'}>Search</Link>
         </div>
       </div>
     </div>
   </nav>
+
 
 
   // return <div>

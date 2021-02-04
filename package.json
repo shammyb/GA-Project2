@@ -18,6 +18,7 @@
     "babel-loader": "^8.0.5",
     "css-loader": "^3.5.3",
     "dotenv-webpack": "^4.0.0",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.3.0",
     "sass": "^1.32.6",
     "sass-loader": "^8.0.2",
@@ -29,10 +30,14 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bulma": "^0.9.2",
+    "font-face": "^2.3.4",
+    "fontface-loader": "^0.0.8",
     "formik": "^2.2.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.15.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "react-spinners": "^0.10.4",
+    "uuid": "^3.4.0"
   }
 }

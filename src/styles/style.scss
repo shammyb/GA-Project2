@@ -5,6 +5,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron');
 @import url('https://fonts.googleapis.com/css2?family=Cousine:wght@700&display=swap');
 
+@font-face {
+  font-family: 'Otaku Rant Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Otaku Rant Bold'), url('./Otaku Rant Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Otaku Rant italbold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Otaku Rant italbold'), url('./Otaku Rant italbold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Otaku Rant';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Otaku Rant'), url('./Otaku Rant.woff') format('woff');
+}
+
 
 // Set your brand colors
 $red: #963d2f;
@@ -35,12 +54,13 @@ $title-size: 80px;
 .hero-body {
   background-color: $red;
   background-image: url('https://images.alphacoders.com/661/thumb-1920-661647.png');
-  font-family: "Orbitron", sans-serif;
+  font-family: 'otaku rant bold';
 }
 
 #title {
-  font-family: "Cousine";
+  font-family: 'otaku rant italbold';
 }
+
 h1{
   text-align: center;
 }
