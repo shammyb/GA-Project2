@@ -19,14 +19,24 @@ export default function Details({ location, loading }) {
   //   return null
   // }
 
-  return <div>
-    <div>Name: {anime.title || 'N/A'}</div>
-    <div>Japanese: {anime.title_japanese || 'N/A'}</div>
-    <div>English name: {anime.title_english || 'N/A'}</div>
-    <div>Synopsis: {anime.synopsis}</div>
-    <div>MyAnimeList Score: {anime.score}</div>
-    <div>Number of episodes: {anime.episodes}</div>
-    <img src={anime.image_url} alt={anime.title} />
-    <iframe src={anime.trailer_url || 'No trailer 😔'} />
+  return <div className="container is-max-desktop">
+    <div className="notification is-primary">Name: {anime.title || 'N/A'}</div>
+    <div className="notification is-primary">Japanese: {anime.title_japanese || 'N/A'}</div>
+    <div className="notification is-primary">English name: {anime.title_english || 'N/A'}</div>
+    <div className="notification is-primary">Synopsis: {anime.synopsis}</div>
+    <div className="notification is-primary">MyAnimeList Score: {anime.score}</div>
+    <div className="notification is-primary">Number of episodes: {anime.episodes}</div>
+    <div className="columns is-centered">
+      <img src={anime.image_url} alt={anime.title} />
+    </div>
+    <div className="columns is-centered">
+      <iframe src={anime.trailer_url || 'No trailer 😔'}
+        autoPlay="false"
+        allowFullScreen="allowFullScreen"
+        mozallowfullscreen="mozallowfullscreen"
+        msallowfullscreen="msallowfullscreen"
+        oallowfullscreen="oallowfullscreen"
+        webkitallowfullscreen="webkitallowfullscreen" />
+    </div>
   </div>
 }

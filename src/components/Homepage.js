@@ -7,7 +7,9 @@ export default function Home() {
       <div className="container has-text-centered">
         <h1 className="title">Anime4Days</h1>
         <h2 className="subtitle">Find your next favourite anime!</h2>
-        <button className="button">Start</button>
+        <Link to={'/panel/'}>
+          <button className="button">Search Now</button>
+        </Link>
       </div>
     </div>
   </main>
