@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { Formik, Field, Form } from 'formik'
 
-// import { debounce } from 'lodash'
-// import axios from 'axios'
+
 
 
 import Searches from './Searches'
@@ -14,37 +13,28 @@ export default function Panel() {
   const [loading, updateLoading] = useState(true)
   const [formNum, updateFormNum] = useState(0)
   const [searchBarActive, updateSearchBarActive] = useState(false)
+  const [loadMore, updateLoadMore] = useState(1)
 
-  // const debouncedSave = debounce((query, updateShows) => {
-  //   axios.get(`https://api.jikan.moe/v3/search/anime?q=${query}&page=1`)
-  //     .then(({ data }) => {
-  //       updateShows(data)
-  //     })
-  // }, 500)
-
-
-  // useEffect(() => {
-  //   debouncedSave(filter, updateShows)
-
-  // }, [filter])
 
 
   function createSearchQuery() {
+    updateLoadMore(loadMore + 1)
+    const pageNum = loadMore * 12
     const likedQuery = genresLiked.join('&genre=')
-    updateSearchQuery(`?q=&page=1&genre=${likedQuery}&order_by=members&sort=desc&limit=12`)
-    updateLoading(false)
+    updateSearchQuery(`?q=&page=1&genre=${likedQuery}&order_by=members&sort=desc&limit=${pageNum}`)
+    updateLoading(!loading)
     updateFormNum(3)
   }
 
   function createFilterQuery(filter) {
     updateSearchBarActive(true)
     updateSearchQuery(`?q=${filter}`)
-    updateLoading(false)
+    updateLoading(!loading)
   }
 
   function resetSearch() {
     updateSearchBarActive(false)
-    updateLoading(true)
+    updateLoading(!loading)
     updateFormNum(0)
   }
 
@@ -56,7 +46,7 @@ export default function Panel() {
       </div>
 
       <div className="columns is-centered">
-        <div className="column is-two-thirds">
+        <div className="column is-half">
           <div className="box is-half has-background-primary mt-3">
             <Formik
               initialValues={{
@@ -85,7 +75,7 @@ export default function Panel() {
         <p className="is-size-6 has-text-centered">You will get suggestions based on MyAnimeList popularity rankings</p>
       </div>
       <div className="columns is-centered">
-        <div className="column is-two-thirds">
+        <div className="column is-half">
           <div className="box has-background-primary mt-3">
             <div className="field is-grouped is-grouped-centered">
               <button className="button" onClick={() => updateFormNum(1)}>Get a Recommendation</button>
@@ -97,7 +87,7 @@ export default function Panel() {
   }
 
   const GenresLikedForm = () => (
-    <div className="box">
+    <div>
       <p className="title is-3 has-text-centered">What stuff do you like?</p>
       <p className="subtitle is-5 has-text-centered">Less genres picked will give you a better recommendation!</p>
       <Formik
@@ -192,9 +182,7 @@ export default function Panel() {
       <div className="columns is-centered">
         <div className="column is-two-thirds">
           <div className="field is-grouped is-grouped-centered">
-            <div className="box">
-              <button className="button is-primary" onClick={() => createSearchQuery()}>Get Suggestions!</button>
-            </div>
+            <button className="button is-primary" onClick={() => createSearchQuery()}>Get Suggestions!</button>
           </div>
         </div>
       </div>
@@ -203,15 +191,39 @@ export default function Panel() {
 
   return <div>
     {formNum === 0 && <StartSearch />}
-    {formNum === 1 && <GenresLikedForm />}
-    {formNum === 2 && <div><GenresLikedForm /><ReadyToSubmit /></div>}
+    {formNum === 1 && <div className="box"><GenresLikedForm /></div>}
+    {formNum === 2 && <div className="box"><GenresLikedForm /><ReadyToSubmit /></div>}
     {formNum === 3 && <div>
       <div className="container">
         <div className="columns is-centered">
           <div className="column is-two-thirds">
             <div className="field is-grouped is-grouped-centered">
               <div className="box mt-3">
-                <button className="button is-primary" onClick={() => updateFormNum(1)}> Try another? </button>
+                <button className="button is-primary" onClick={() => updateFormNum(0)}> Search again? </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Searches queryString={searchQuery} loading={loading} />
+      <div className="columns is-centered">
+        <div className="column is-two-thirds">
+          <div className="field is-grouped is-grouped-centered">
+            <div className="box mt-3">
+              <button className="button is-primary" onClick={() => createSearchQuery()}> Load More </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+    {searchBarActive === true && <div>
+      <div className="container">
+        <div className="columns is-centered">
+          <div className="column is-two-thirds">
+            <div className="field is-grouped is-grouped-centered">
+              <div className="box mt-3">
+                <button className="button is-primary" onClick={() => resetSearch()}> Reset Search </button>
               </div>
             </div>
           </div>
@@ -220,33 +232,6 @@ export default function Panel() {
       <Searches queryString={searchQuery} loading={loading} />
     </div>
     }
-    {searchBarActive === true && <div>
-      <div className="container">
-        <button className="button is-primary" onClick={() => resetSearch()}> Reset Search </button>
-      </div>
-      <Searches queryString={searchQuery} loading={loading} />
-    </div>
-    }
   </div>
 }
 
-{/* <section className="section">
-  <div className="container">
-    <div className="container">
-      <h1>Hey this app will search and recommend anime to you! If you know what youre looking for feel free to look up your favourites in the search bar. Or if you fancy something new, hit the get a recommendation button below! </h1>
-    </div>
-
-    <form>
-      <input
-        type="text"
-        className="input"
-        placeholder="Enter anime name.."
-        onChange={(event) => updateFilter(event.target.value)}
-        value={filter}
-      />
-      <button className="button" type="submit" onClick={() => createFilterQuery()}>Search by Name</button>
-    </form>
-
-    <button className="button" onClick={() => updateFormNum(1)}>Get a Recco</button>
-  </div>
-</section>} */}
