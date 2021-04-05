@@ -1,5 +1,3 @@
-![ga_cog_large_red_rgb](./readmeImages/GAlogo.png)
-	
 	
 ### Software Engineering Immersive
 
@@ -19,11 +17,10 @@ Please check out our 48-our app here! [Anime4Days](https://raspanda.github.io/GA
 
 ### Anime4Days Intro
 
-![homepage](./readmeImages/homepage.png)
 
 The app we created serves as a simple search engine, which fetches data on anime from the Jikan API and renders information on our page. A user is able to provide a search query in the client, so is able to search for any anime by name.
 
-![searchpage](./readmeImages/searchpage.png)
+
 
 More interestingly, we have a recommendation functionality as well. The user is able to provide one or more genres of interest, and our app will then render recommendations based on the users' selection(s). The recommendations are based on MyAnimeList popularity, and the results are paginated so the user can explore the list in case they need want more suggestions!
 
@@ -122,7 +119,6 @@ This was the more straightforward way to amend the queryString variable, this si
 
 This was much more complicated, as it required a longer user journey. It also required a more complex method for the queryString building as well. We first took the user along a form-flow, which included a view with a large number of checkboxes. Once the user selected their boxes and proceeded, these boxes then were passed through to build the queryString.
 
-![recommendationpage](./readmeImages/recommendationpage.png)
 
 The main reason we chose to use Formik forms, was due to how Formik provided the output from checkbox selections. Formik provides an array of checkbox values, which was very convenient for us as the Jikan API search parameters for Anime genre requires a series of comma-separated numbers (e.g. q=&page=1&genre=**1,4,6,7**&order_by=members). This meant that converting the Formik output for use in the queryString was relatively straightforward.
 
@@ -273,13 +269,11 @@ This was quite a simple, yet effective, way to render the different form compone
 
 Once the user completed either search journey, we needed to of course render the results. We did this by mapping through the fetched data array, and rendering simple cards on a page with a title and an image.
 
-![results](./readmeImages/results.png)
 
 Importantly, we needed to store some information on each card. This information would then pass the id of the specific Anime to the next page, when the user clicks on any card. The purpose of this was then to send another request for that anime only, to render the page for that specific result.
 
-![singleresult](./readmeImages/singleresult.png)
 
-The code for this was relatively short and sweet! Firstly, for the search results cards, most lines were required for styling and layout purposes.
+The code for single results was relatively short and sweet! Firstly, for the search results cards, most lines were required for styling and layout purposes.
 
 ```Javascript
 // ! mapping through results data array
